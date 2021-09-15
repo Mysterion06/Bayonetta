@@ -15,6 +15,23 @@ start{
     }
 }
 
+startup{
+    //Asks the user to set his timer to game time on livesplit, which is needed for verification
+    if (timer.CurrentTimingMethod == TimingMethod.RealTime) // Inspired by the Modern warfare 3 Autosplitter
+    {        
+        var timingMessage = MessageBox.Show (
+            "This game uses Time without Loads (Game Time) as the main timing method.\n"+
+            "LiveSplit is currently set to show Real Time (RTA).\n"+
+            "Would you like to set the timing method to Game Time? This will make verification easier.",
+            "LiveSplit | Bayonetta",
+            MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+        if (timingMessage == DialogResult.Yes)
+        {
+            timer.CurrentTimingMethod = TimingMethod.GameTime;
+        }
+    }
+}
+
 /*init{
     //Signature scanning
     var pattern = new SigScanTarget("00 00 00 00 50 05 00 00 00 03 00 00 57 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 ?? ?? 00 00");
